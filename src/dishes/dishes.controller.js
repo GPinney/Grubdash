@@ -18,7 +18,7 @@ function dishExists(req, res, next) {
 }
 
 
-function bodyHasNameProperty(req, res, next) {
+function bodyName(req, res, next) {
   const { data: { name } = {} } = req.body;
   if (name && name.length > 0) {
     return next();
@@ -29,7 +29,7 @@ function bodyHasNameProperty(req, res, next) {
   });
 }
 
-function bodyHasImageProperty(req, res, next) {
+function bodyImage(req, res, next) {
   const { data: { image_url } = {} } = req.body;
   if (image_url && image_url.length > 0) {
     return next();
@@ -40,7 +40,7 @@ function bodyHasImageProperty(req, res, next) {
   });
 }
 
-function bodyHasDescriptionProperty(req, res, next) {
+function bodyDescription(req, res, next) {
   const { data: { description } = {} } = req.body;
   if (description && description.length > 0) {
     return next();
@@ -51,7 +51,7 @@ function bodyHasDescriptionProperty(req, res, next) {
   });
 }
 
-function bodyHasPriceProperty(req, res, next) {
+function bodyPrice(req, res, next) {
   const { data: { price } = {} } = req.body;
   if (price && price > 0 && Number.isInteger(price)) {
     return next();
@@ -132,19 +132,19 @@ function update(req, res) {
 module.exports = {
   list,
   create: [
-    bodyHasNameProperty, 
-    bodyHasImageProperty, 
-    bodyHasDescriptionProperty, 
-    bodyHasPriceProperty, 
+    bodyName, 
+    bodyImage, 
+    bodyDescription, 
+    bodyPrice, 
     create],
   read: [dishExists, read],
   update: [
     dishExists, 
     doesDishIdMatchRouteId, 
-    bodyHasNameProperty, 
-    bodyHasDescriptionProperty, 
-    bodyHasDescriptionProperty, 
-    bodyHasImageProperty, 
-    bodyHasPriceProperty, 
+    bodyName, 
+    bodyDescription, 
+    bodyDescription, 
+    bodyImage, 
+    bodyPrice, 
     update]
 }
